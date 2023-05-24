@@ -1,6 +1,9 @@
+import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import gsap from 'gsap'
+
+import * as dat from 'lil-gui'
 
 /**
  * Base
@@ -11,6 +14,7 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
+
 /**
  * Object
  */
@@ -18,6 +22,20 @@ const geometry = new THREE.BoxGeometry(1, 1, 1)
 const material = new THREE.MeshBasicMaterial({ color: 0xff0000 })
 const mesh = new THREE.Mesh(geometry, material)
 scene.add(mesh)
+
+
+//debug
+const gui = new dat.GUI()
+gui.add(mesh.position, 'y',-3,3,0.01)
+gui.add(mesh.position,'x',-3,3-0,0.01)
+gui.add(mesh,'visible')
+gui.add(material,'wireframe')
+const parameters = {
+    color: 0xff0000
+}
+gui
+    .addColor(parameters)
+
 
 /**
  * Sizes
